@@ -15,12 +15,18 @@ def format_date(date_string):
     return None
 
 
-if __name__ == '__main__':
-    input_dates = []
-    date = input().strip()
-    formatted_date = format_date(date)
-    if formatted_date:
-       input_dates.append(formatted_date)
+def read_file(file_name):
+    dates = []
+    with open(file_name, 'r') as file:
+        for line in file:
+            date = format_date(line.strip())
+            if date:
+                dates.append(date)
+    return dates
 
-    for date in input_dates:
+if __name__ == '__main__':
+    file_name = "inputDates.txt"
+    dates_from_file = read_file(file_name)
+    print("\nDates from file:")
+    for date in dates_from_file:
         print(date)
