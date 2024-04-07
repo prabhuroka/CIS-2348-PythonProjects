@@ -1,6 +1,7 @@
 # Prabhu Roka
 # 1986444
 import csv
+from datetime import datetime
 
 
 # class student to include all the properties of a student
@@ -108,14 +109,19 @@ def write_major_lists(students, filename_template):
                 writer.writerow([student.student_id, student.last_name, student.first_name, student.graduation_date,
                                  student.disciplinary_action])
 
+# function to check for graduated or not
+def is_graduated(student):
+    return (student.graduation_date is not None and
+            datetime.strptime(student.graduation_date, "%m/%d/%Y") <= datetime.now())
+
 
 # function to write student with scholarship eligibility to a file.
 def write_scholarship_candidates(students, filename):
     scholarship_candidates = []
     for student in students:
         # condition for scholarship eligibility and appended to list.
-        if (student.gpa is not None and student.gpa > 3.8
-                and not student.disciplinary_action and not student.graduation_date):
+        if (student.gpa is not None and student.gpa > 3.8 and not student.disciplinary_action
+                and not is_graduated(student)):
             scholarship_candidates.append(student)
     # sorting the candidates by gpa from highest to lowest
     scholarship_candidates.sort(key=sort_by_gpa, reverse=True)
