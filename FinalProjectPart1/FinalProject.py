@@ -146,10 +146,20 @@ def write_disciplined_students(students, filename):
 
 # calling all the defined functions above in "main" function.
 def main():
+    # assigning filenames from input.
+    major_list = input("Enter the major list file name:")
+    gpa_list = input("Enter the gpa list file name:")
+    graduation_date_list = input("Enter the graduation date list file name:")
+
     # calling and assigning the data from the files to variables.
-    students_data = read_csv("StudentsMajorsList.csv")
-    gpa_data = read_csv("GPAList.csv")
-    graduation_data = read_csv("GraduationDatesList.csv")
+    students_data = read_csv(major_list)
+    gpa_data = read_csv(gpa_list)
+    graduation_data = read_csv(graduation_date_list)
+
+    # Code with already named files for testing
+    # students_data = read_csv("StudentsMajorsList.csv")
+    # gpa_data = read_csv("GPAList.csv")
+    # graduation_data = read_csv("GraduationDatesList.csv")
 
     # assigning all the datas read from the files to variable students by calling the process_students function.
     students = process_students(students_data, gpa_data, graduation_data)
